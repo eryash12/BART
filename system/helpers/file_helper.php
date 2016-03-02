@@ -111,10 +111,10 @@ if ( ! function_exists('write_file'))
 if ( ! function_exists('delete_files'))
 {
 	/**
-	 * Delete Files
+	 * Delete files
 	 *
 	 * Deletes all files contained in the supplied directory path.
-	 * Files must be writable or owned by the system in order to be deleted.
+	 * files must be writable or owned by the system in order to be deleted.
 	 * If the second parameter is set to TRUE, any directories contained
 	 * within the supplied base directory will be nuked as well.
 	 *
