@@ -12,7 +12,9 @@ class Home extends CI_Controller{
         $this->load->view("Main_page");
 
     }
-
+    function map(){
+        $this->load->view("map");
+    }
 
 
 }

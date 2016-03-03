@@ -10,7 +10,10 @@
         <head>
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
             <script src="<?php echo base_url()?>files/jquery.xml2json.js"></script>
-            <script src="<?php echo base_url()?>files/Main_page.js?>"></script>
+
+            <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
+            <script src="<?php echo base_url()?>files/Main_page.js"></script>
+
             <link rel="icon" type="image/png" href="<?php echo base_url()?>files/pics/bartlogo.png" />
 <!--            Bootstrap-->
             <!-- Latest compiled and minified CSS -->
@@ -74,65 +77,9 @@
                         </form>
                         <button id="search-submit" type="submit" class="btn btn-default" style="margin-top: 50px">Search Routes</button>
                         <div id="route-display" style="display: none">
-                            <h3>All routes from fremont to SFIA</h3>
-                            <p>Fremont Departure time :  SFIA arrival time : Total Fare </p>
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Source</th>
-                                    <th>Destination</th>
-                                    <th>Dep Time</th>
-                                    <th>Arr Time</th>
-                                    <th>Line</th>
-                                    <th>Towards</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                </tbody>
-                            </table>
 
-                            <table class="table">
-                                <thead>
-                                <tr>
-                                    <th>Firstname</th>
-                                    <th>Lastname</th>
-                                    <th>Email</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>John</td>
-                                    <td>Doe</td>
-                                    <td>john@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>Mary</td>
-                                    <td>Moe</td>
-                                    <td>mary@example.com</td>
-                                </tr>
-                                <tr>
-                                    <td>July</td>
-                                    <td>Dooley</td>
-                                    <td>july@example.com</td>
-                                </tr>
-                                </tbody>
-                            </table>
                         </div>
+                        <div id="map" style="height: 400px ; width: inherit;display: none;" ></div>
                     </div>
                     <div id="all-stations" class="tab-pane fade in active">
                         <h3>All Bart Stations</h3>
@@ -151,6 +98,11 @@
             </div>
         </main>
         <footer>
+            <script>
+
+
+
+            </script>
 
         </footer>
         </body>
