@@ -118,12 +118,20 @@ $(document).ready(function(){
         }
         var srcAbbr;
         var destAbbr;
+        var srcLat;
+        var srcLng;
+        var desLat;
+        var desLng;
         for(var i = 0 ; i<stations.length ; ++i){
             if(srcStation === stations[i].name){
                 srcAbbr = stations[i].abbr;
+                srcLat = parseFloat(stations[i]['gtfs_latitude']);
+                srcLng = parseFloat(stations[i]['gtfs_longitude']);
             }
             if(desStation === stations[i].name){
                 destAbbr = stations[i].abbr;
+                desLat = parseFloat(stations[i]['gtfs_latitude']);
+                desLng = parseFloat(stations[i]['gtfs_longitude']);
             }
 
         }
@@ -150,6 +158,7 @@ $(document).ready(function(){
         for(var i = 0 ; i<srcdest.length ; ++i){
             var thisTrip = srcdest[i];
             var legs = srcdest[i].leg;
+            //if(i=0)
             routeDiv.append("<p><b>"+srcStation+"</b> Departure time "+thisTrip.origTimeMin+"  <b>"+desStation+"</b> arrival time "+thisTrip.destTimeMin+" <b>Total Fare</b> = $"+thisTrip.fare+"</p>");
             console.log("<p>"+srcStation+" Departure time :"+thisTrip.origTimeMin+"  "+desStation+" arrival time :"+thisTrip.destTimeMin+" <b>Total Fare</b> = $"+thisTrip.fare+"</p>");
             var text = "";
@@ -173,6 +182,47 @@ $(document).ready(function(){
             routeDiv.append(text);
 
         }
+            $("#map").css("display","block");
+            initMap(srcLat,srcLng,desLat,desLng);
+        });
+
+    }
+
+    function initMap(srcLat,srcLng,desLat,desLng) {
+        var map;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+        var directionsService = new google.maps.DirectionsService;
+
+        map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 37.3501000, lng: -121.9462250},
+            zoom: 14
+
+        });
+        directionsDisplay.setMap(map);
+        //var transitLayer = new google.maps.TransitLayer();
+        //transitLayer.setMap(map);
+        var selectedMode = 'TRANSIT';
+        var unix = Date.now();
+        directionsService.route({
+            origin: {lat: srcLat, lng: srcLng},
+            destination: {lat: desLat, lng: desLng},
+            travelMode: google.maps.TravelMode.TRANSIT,
+            transitOptions: {
+                departureTime: new Date(unix),
+                //modes: [google.maps.TransitMode.TRAIN],
+                routingPreference: google.maps.TransitRoutePreference.FEWER_TRANSFERS
+            },
+            unitSystem: google.maps.UnitSystem.IMPERIAL
+        }, function(response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+            } else {
+                window.alert('Directions request failed due to ' + status);
+            }
         });
     }
+
+
+
+
 });
