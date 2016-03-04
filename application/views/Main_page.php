@@ -12,6 +12,7 @@
             <script src="<?php echo base_url()?>files/jquery.xml2json.js"></script>
 
             <script src="https://maps.googleapis.com/maps/api/js" async defer></script>
+            <script src="<?php echo base_url()?>files/jquery.countdown.min.js"></script>
             <script src="<?php echo base_url()?>files/Main_page.js"></script>
 
             <link rel="icon" type="image/png" href="<?php echo base_url()?>files/pics/bartlogo.png" />
@@ -51,7 +52,7 @@
 
                     <li role="presentation" class="active"><a data-toggle="tab" href="#all-stations">All Stations</a></li>
                     <li role="presentation" ><a data-toggle="tab" href="#search">Search Route</a></li>
-                    <li role="presentation"><a data-toggle="tab" href="#">Messages</a></li>
+
                 </ul>
 <!--                <h2>All Bart Stations</h2>-->
 
@@ -76,19 +77,21 @@
 
                         </form>
                         <button id="search-submit" type="submit" class="btn btn-default" style="margin-top: 50px">Search Routes</button>
+
+                        <div id="clock"></div>
+
                         <div id="route-display" style="display: none">
 
                         </div>
                         <div id="map" style="height: 400px ; width: inherit;display: none;" ></div>
                     </div>
-                    <div id="all-stations" class="tab-pane fade in active">
+                    <div  class="tab-pane fade in active">
                         <h3>All Bart Stations</h3>
-                        <p>Some content in menu 1.</p>
+                        <ul id="all-stations" class="list-group"  style="max-height: 700px">
+
+                        </ul>
                     </div>
-                    <div id="menu2" class="tab-pane fade">
-                        <h3>Menu 2</h3>
-                        <p>Some content in menu 2.</p>
-                    </div>
+
                 </div>
 
 

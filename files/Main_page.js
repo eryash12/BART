@@ -8,7 +8,11 @@ $(document).ready(function(){
         stations = $.xml2json(data);
         stations = stations['stations'];
         stations = stations['station'];
-        console.log($.xml2json(data));
+        for(var i = 0 ; i<stations.length ; ++i){
+
+            $("#all-stations").append("<li class=\"list-group-item col-md-6\">"+stations[i].name+" "+"["+stations[i].abbr+"]"+"</li>");
+        }
+
     });
     $('#src-input').keyup(function(){
        var data = $(this).val();
@@ -101,7 +105,7 @@ $(document).ready(function(){
     });
     var schedule ;
     function displaySchedule()
-    {
+    {   timeFlag =1;
         var srcStation =  $('#src-input').val();
         var desStation = $('#dest-input').val();
         if(srcStation === ""){
@@ -147,7 +151,7 @@ $(document).ready(function(){
             //stations = stations['station'];
             console.log($.xml2json(data));
 
-
+        var departTimes = [];
         var routeDiv = $("#route-display");
         routeDiv.empty();
         routeDiv.css('display','block');
@@ -158,9 +162,11 @@ $(document).ready(function(){
         for(var i = 0 ; i<srcdest.length ; ++i){
             var thisTrip = srcdest[i];
             var legs = srcdest[i].leg;
+
             //if(i=0)
             routeDiv.append("<p><b>"+srcStation+"</b> Departure time "+thisTrip.origTimeMin+"  <b>"+desStation+"</b> arrival time "+thisTrip.destTimeMin+" <b>Total Fare</b> = $"+thisTrip.fare+"</p>");
             console.log("<p>"+srcStation+" Departure time :"+thisTrip.origTimeMin+"  "+desStation+" arrival time :"+thisTrip.destTimeMin+" <b>Total Fare</b> = $"+thisTrip.fare+"</p>");
+            departTimes.push(thisTrip.origTimeMin)
             var text = "";
             text = text + " <table class=\"table\"> <thead> <tr> <th>Source</th> <th>Destination</th> <th>Dep Time</th> <th>Arr Time</th> <th>Line</th> <th>Towards</th> </tr> </thead> <tbody>"
             console.log(legs instanceof Array);
@@ -182,6 +188,18 @@ $(document).ready(function(){
             routeDiv.append(text);
 
         }
+            var today = new Date();
+            var dd = today.getDate();
+            var mm = today.getMonth()+1; //January is 0!
+            var yyyy = today.getFullYear();
+            var firstTime = departTimes[0];
+
+            var full_date = yyyy+"/"+mm+"/"+dd+" "+firstTime;
+            $('#clock').countdown(full_date, function(event) {
+                var totalHours = event.offset.totalDays * 24 + event.offset.hours;
+                $(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
+            });
+
             $("#map").css("display","block");
             initMap(srcLat,srcLng,desLat,desLng);
         });
@@ -221,8 +239,12 @@ $(document).ready(function(){
             }
         });
     }
-
-
+    var timeFlag = 0;
+    window.setInterval(function(){
+        /// call your function here
+        if(timeFlag === 1 )
+        displaySchedule();
+    }, 30000);
 
 
 });
