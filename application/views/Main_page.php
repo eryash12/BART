@@ -115,11 +115,12 @@
             </div>
         </main>
         <footer>
-            <script>
-
-
-
-            </script>
+<!--            Answer to the question-->
+<!--            The Same origin policy can be disabled by other domains inorder to be accesible by other domains.
+ On of the mechanisms is JSONP which dyanamically injects <script> tags to send a request to any domains along with any parameters.
+ Another way is to invoke the Rest APis on other domains is to use the cross origin resource sharing mechanism(CORS) in which the
+ browsers dont deny cross-origin requests. The target service tells the browser that it wants to allow cross-origin requests by inserting special HTTP headers in responses:
+            Access-Control-Allow-Origin: http://www.example.com  -->
 
         </footer>
         </body>
