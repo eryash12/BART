@@ -197,7 +197,7 @@ $(document).ready(function(){
             var full_date = yyyy+"/"+mm+"/"+dd+" "+firstTime;
             $('#clock').countdown(full_date, function(event) {
                 var totalHours = event.offset.totalDays * 24 + event.offset.hours;
-                $(this).html(event.strftime(totalHours + ' hr %M min %S sec'));
+                $(this).html("Time left for your next train <b>"+event.strftime(totalHours + ' hr %M min %S sec')+"</b>");
             });
 
             $("#map").css("display","block");

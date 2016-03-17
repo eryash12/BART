@@ -50,7 +50,7 @@
             <div class="jumbotron selection-panel" style="">
                 <ul class="nav nav-tabs">
 
-                    <li role="presentation" class="active"><a data-toggle="tab" href="#all-stations">All Stations</a></li>
+                    <li role="presentation" class="active"><a data-toggle="tab" href="#all-stations-div">All Stations</a></li>
                     <li role="presentation" ><a data-toggle="tab" href="#search">Search Route</a></li>
 
                 </ul>
@@ -78,14 +78,28 @@
                         </form>
                         <button id="search-submit" type="submit" class="btn btn-default" style="margin-top: 50px">Search Routes</button>
 
-                        <div id="clock"></div>
+                        <div id="clock" style="margin-top: 10px"></div>
 
                         <div id="route-display" style="display: none">
 
                         </div>
                         <div id="map" style="height: 400px ; width: inherit;display: none;" ></div>
                     </div>
-                    <div  class="tab-pane fade in active">
+                    <div id="all-stations-div" class="tab-pane fade in active">
+
+                        <h2 id="welcome-msg"></h2>
+                        <script>
+                            var last_visited = localStorage.getItem("lastvisited");
+                            if(last_visited == null ){
+                                $("#welcome-msg").html("Welcome! Looks like its your first time here.");
+                                localStorage.setItem("lastvisited",1);
+                            }
+                            else{
+                                last_visited++;
+                                $("#welcome-msg").html("Welcome! Looks like you like us. This is your "+last_visited+" visit");
+                                localStorage.setItem("lastvisited",last_visited);
+                            }
+                        </script>
                         <h3>All Bart Stations</h3>
                         <ul id="all-stations" class="list-group"  style="max-height: 700px">
 
